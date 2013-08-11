@@ -2,8 +2,7 @@
 module Intersect where
 
 import Vector
-
-type Colour = [Integer]
+import Image
 
 -- other visual properties to consider:
 -- refractive index, transparency
@@ -39,8 +38,8 @@ solve_quadratic    a         b         c         =  solutions
           sqrt_d                        = sqrt discriminant 
 
 
--- ray_surface_intersect returns a list of the values of d where Ray rx rv intersects
--- the surface at rx+(d*rv).
+-- ray_surface_intersect returns a list of the values of d where
+-- Ray rx rv intersects the surface at rx+(d*rv).
 ray_surface_intersect :: Ray -> Surface -> [Scalar]
 
 -- Case for spherical surfaces
@@ -48,12 +47,12 @@ ray_surface_intersect (Ray rx rv) (Sphere sx radius col) = intersections
     where intersections = filter (> epsilon) (solve_quadratic a b c)
                            -- we don't to see out of the back of our head!
           se = (sx - rx)
-          b = (-2.0) * vectorsum (rv * se)
-          a = vectorsum (rv * rv)
-          c = vectorsum (se * se) - (radius * radius)
+          b = (-2.0) * vector_sum (rv * se)
+          a = vector_sum (rv * rv)
+          c = vector_sum (se * se) - (radius * radius)
 
 test_intersect = abs(a - 57.7350269189626) < 0.000001
-    where (Just a) = (ray_surface_intersect
-                             (Ray [0,0,0] (Vector [1.0,1.0,1.0]))
-                             (Sphere [0,0,0] 100.0 [50,50,50]))
+    where (a:as) = (ray_surface_intersect
+                         (Ray (Vector [0.0,0.0,0.0]) (Vector [1.0,1.0,1.0]))
+                         (Sphere (Vector [0.0,0.0,0.0]) 100.0 [50,50,50]))
 

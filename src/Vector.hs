@@ -14,7 +14,6 @@ instance Num Vector where
     negate (Vector xs) = Vector (map negate xs)
     fromInteger x = error "you probably didn't mean to do that"
 
-
 instance Eq Vector where
     (==) (Vector xs) (Vector ys) = all id (zipWith (==) xs ys)
 
@@ -28,9 +27,9 @@ mult l (Vector xs) = Vector (map (*l) xs)
 
 normalise :: Vector -> Vector
 normalise v@(Vector vs) = Vector (map (/mag) vs)
-    where mag = (sqrt . vectorsum) (v * v)
+    where mag = (sqrt . vector_sum) (v * v)
 
 -- get the sum of the scalar elements of a vector
-vectorsum :: Vector -> Scalar
-vectorsum (Vector xs) = sum xs
+vector_sum :: Vector -> Scalar
+vector_sum (Vector xs) = sum xs
 

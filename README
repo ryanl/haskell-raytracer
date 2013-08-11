@@ -1,7 +1,7 @@
 Haskell Raytracer
 =================
 
-This program is Copyright (C) 2006-2012 Ryan Lothian. All rights reserved.
+This program is Copyright (C) 2006-2013 Ryan Lothian. All rights reserved.
 
 
 Purpose 
@@ -45,4 +45,6 @@ To compile and run regression tests:
   
 To run:
 
-@@@ TODO
+  ./raytracer        - This will render a scene with three spheres, outputting
+                       a PPM image file. You can use eog to open this on
+                       Ubuntu.
